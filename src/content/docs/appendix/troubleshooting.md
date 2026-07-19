@@ -262,9 +262,9 @@ Read the failed test names before changing anything. Also check **Event Viewer >
 
 If DC01 worked at the end of the previous module and the failure followed a known change, restoring the last verified snapshot may be faster and safer than making several untracked repairs. Review [Snapshot Strategy](/appendix/snapshots/) first so related VMs are not restored to mismatched stages.
 
-## Before Asking for Help
+## Gather Information for Further Troubleshooting
 
-Record:
+If the steps above do not solve the problem, record:
 
 - The exact error message
 - Which VM and module you were working on
@@ -274,4 +274,6 @@ Record:
 - Relevant `gpresult` output for a Group Policy problem
 - The latest matching snapshots available
 
-Specific symptoms and command output make troubleshooting much faster than a general description such as "the domain does not work."
+Use these details when searching official documentation, comparing your problem with forum discussions, or asking for help in an appropriate technical community. Exact symptoms and command output are more useful than a general description such as "the domain does not work."
+
+Before posting command output publicly, review it and remove any personal or sensitive information.
