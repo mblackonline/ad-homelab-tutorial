@@ -3,7 +3,7 @@ title: "Module 1: Prerequisites"
 description: Hardware requirements, software downloads, and why this guide uses VirtualBox.
 ---
 
-Before building anything, you need to make sure your computer can handle the lab and gather the software you will install. This module walks through all of it. Everything you download here is free and comes directly from the official vendors.
+This module makes sure your computer can handle the lab and gathers the software you need. Everything is free and comes directly from the official vendors.
 
 ## In This Module
 
@@ -31,22 +31,13 @@ Apple Silicon Macs (M1, M2, M3, and newer) are not supported. This lab requires 
 
 ### RAM
 
-**16 GB is recommended.** With 16 GB, you can run the domain controller (4 GB), a Windows 11 client (4 GB), and still have 8 GB left for your host operating system. Everything will run smoothly.
+**16 GB is recommended.** That covers the domain controller (4 GB), a Windows 11 client (4 GB), and leaves 8 GB for your host operating system.
 
-**8 GB is the absolute minimum, and it will be rough.** If 8 GB is all you have, you can still complete this lab, but go in with the right expectations:
-
-- Both VMs and your host will be fighting over the same memory, so everything will be slow. Windows installs that take 20 minutes on a 16 GB machine may take an hour or more.
-- You will need to close every other program on your host while the lab is running. No browser tabs, no music, nothing.
-- You may need to run only one VM at a time for some tasks, which makes parts of this guide harder to follow.
-- Freezes and crashes are more likely, so take snapshots often (covered in the appendix).
-
-If you are on 8 GB and find the experience too frustrating, that is not a reflection of your skills. It is a hardware limitation. The lab will still teach you the concepts, just more slowly.
+**8 GB is the absolute minimum, and it will be rough.** The lab is still doable, but expect everything to be slow. Close every other program while the lab runs, be prepared to run one VM at a time for some tasks, and take snapshots often (covered in the appendix) since freezes and crashes are more likely. If it feels painful, that is the hardware, not you.
 
 ### Disk Space
 
-You need at least **100 GB of free disk space**. The virtual machines store their hard drives as large files on your computer, and Windows Server and Windows 11 each need room to install and update. An SSD is strongly recommended. The lab will work on a spinning hard drive, but it will be noticeably slower.
-
-To check your free space on Windows, open File Explorer and click This PC. Your drives and their free space are listed there.
+You need at least **100 GB of free disk space**, since each VM stores its hard drive as a large file on your computer. An SSD is strongly recommended; a spinning hard drive works but will be noticeably slower. To check free space on Windows, open File Explorer and click This PC.
 
 ## Enable Virtualization in BIOS/UEFI
 
@@ -77,7 +68,7 @@ Download VirtualBox only from virtualbox.org. Third-party download sites sometim
 
 ## Download Windows Server 2025
 
-Microsoft provides a free 180-day evaluation of Windows Server 2025. It is the full product, just time-limited, and the appendix covers how to extend the trial when it runs low.
+Microsoft provides a free 180-day evaluation of Windows Server 2025. It is the full product, just time-limited. The appendix covers extending the trial.
 
 1. Go to the [Windows Server 2025 page on the Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025).
 2. Under the ISO download option, click Download the ISO.
