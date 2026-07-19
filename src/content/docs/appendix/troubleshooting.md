@@ -218,7 +218,7 @@ If a console opens but cannot find DC01:
 For example:
 
 ```text
-runas /user:LAB\Administrator "mmc.exe dsa.msc"
+runas /netonly /user:LAB\Administrator "mmc.exe dsa.msc"
 ```
 
 If Active Directory tools work but DHCP or DNS does not appear automatically, use **Add Server** or **Connect to DNS Server** inside that console.
@@ -226,7 +226,7 @@ If Active Directory tools work but DHCP or DNS does not appear automatically, us
 ## The Lab Is Very Slow
 
 - Run DC01 with only one client at a time.
-- On an 8 GB host, assign 3072 MB to DC01 and 3072 MB to the active client.
+- On an 8 GB host, leave the active Windows 11 client at 4096 MB and temporarily reduce DC01 to 2048 MB. Change memory only while the VM is powered off.
 - Close browsers, games, and other memory-heavy host applications.
 - Keep each VM at 2 virtual CPUs. Assigning every host CPU can make performance worse.
 - Store the VMs on an SSD and check that the host has free disk space.
