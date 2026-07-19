@@ -1,0 +1,64 @@
+<mxfile host="Electron">
+  <diagram id="nat-network" name="NAT Network">
+    <mxGraphModel dx="1667" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="internet" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" value="Internet" vertex="1">
+          <mxGeometry height="100" width="200" x="341" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="homeNet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;fontSize=13;fontStyle=1;align=left;spacingLeft=10;spacingTop=6;" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Your Home Network (192.168.x.x)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="440" width="780" x="40" y="162.5" as="geometry" />
+        </mxCell>
+        <mxCell id="router" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" value="Home Router" vertex="1">
+          <mxGeometry height="45" width="140" x="377" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="phone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="Cell Phone" vertex="1">
+          <mxGeometry height="45" width="90" x="70" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="tv" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="Smart TV" vertex="1">
+          <mxGeometry height="45" width="90" x="70" y="347.5" as="geometry" />
+        </mxCell>
+        <mxCell id="famLaptop" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=11;" value="Laptop" vertex="1">
+          <mxGeometry height="45" width="90" x="70" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="hostPC" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;verticalAlign=top;fontSize=12;fontStyle=1;align=left;spacingLeft=10;spacingTop=6;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Your Computer (VirtualBox Host)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="490" x="300" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="natNet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=12;fontStyle=1;align=left;spacingLeft=10;spacingTop=6;" value="&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;div&gt;&amp;nbsp; &amp;nbsp; VirtualBox NAT Network: 10.0.10.0/24&lt;/div&gt;" vertex="1">
+          <mxGeometry height="205" width="420" x="350" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="dc01" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="DC01&#xa;Windows Server 2025&#xa;10.0.10.10 (static)&#xa;ADDS + DNS + DHCP" vertex="1">
+          <mxGeometry height="95" width="180" x="377" y="392.5" as="geometry" />
+        </mxCell>
+        <mxCell id="client01" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" value="CLIENT01&#xa;Windows 11&#xa;IP from DC01 DHCP" vertex="1">
+          <mxGeometry height="65" width="130" x="610" y="375" as="geometry" />
+        </mxCell>
+        <mxCell id="client02" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;dashed=1;fontSize=11;" value="CLIENT02 (optional)&#xa;Windows 11&#xa;IP from DC01 DHCP" vertex="1">
+          <mxGeometry height="65" width="130" x="610" y="455" as="geometry" />
+        </mxCell>
+        <mxCell id="edgeLabToRouter" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#82b366;strokeWidth=3;fontSize=11;fontColor=#4d7a3a;exitX=0.213;exitY=-0.001;entryX=0.5;entryY=1;exitDx=0;exitDy=0;exitPerimeter=0;" value="Outbound allowed (NAT):&#xa;Windows Update, downloads, browsing">
+          <mxGeometry relative="1" x="-0.1171" y="5" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="446.85000000000014" y="324.7800000000001" as="sourcePoint" />
+            <mxPoint x="446.85" y="218" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edgeRouterToInternet" edge="1" parent="1" source="router" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#000000;strokeWidth=2;startArrow=classic;startFill=1;entryX=0.53;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="internet" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="447" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edgeBlocked" edge="1" parent="1" source="famLaptop" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#b85450;strokeWidth=3;dashed=1;fontSize=11;fontColor=#b85450;endArrow=cross;endSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="natNet" value="Inbound blocked:&lt;br&gt;home devices&amp;nbsp;&lt;div&gt;cannot&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(184, 84, 80), rgb(215, 129, 126));&quot;&gt;reach the lab&lt;/span&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.1689" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note" parent="1" style="text;html=1;whiteSpace=wrap;fontSize=10;fontStyle=2;fontColor=#666666;" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; The lab VMs share one private network. They can reach the internet through NAT, but nothing on the home network can start a connection into the lab." vertex="1">
+          <mxGeometry height="30" width="740" x="60" y="605" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
