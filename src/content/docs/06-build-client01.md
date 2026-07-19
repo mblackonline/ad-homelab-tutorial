@@ -128,9 +128,7 @@ Shut down CLIENT01 and take a snapshot named `Domain joined`. Take a fresh one o
 ## Further Learning
 
 - [VirtualBox System Settings](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html) explains the VM settings used for UEFI, Secure Boot, TPM, memory, processors, and display configuration.
-- [Customize the Windows 11 Out of Box Experience](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/customize-oobe-in-windows-11) describes the setup screens that appear after Windows is installed.
 - [Join a Computer to a Domain](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/join-computer-to-domain) covers Microsoft's supported graphical and command-line domain-join methods.
-- [Active Directory Domain Join Permissions](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/active-directory-domain-join-permissions) provides a deeper look at which accounts can add computers to a domain and how those permissions can be delegated.
 
 ## Checklist Before Moving On
 
