@@ -1,169 +1,52 @@
 ---
 title: Extending the Evaluation Licenses
-description: How to check, activate, and rearm the lab's time-limited Windows evaluations when the installed build permits it.
+description: Check activation status and rearm the lab's time-limited Windows evaluations.
 ---
 
-The lab uses time-limited evaluation editions: 180 days for Windows Server 2025 and 90 days for Windows 11 Enterprise. Windows includes the Software Licensing Management Tool, `slmgr.vbs`, which shows the current license state and can reset the activation timer when that installation has a rearm available.
+The lab runs on time-limited evaluations: **180 days** for Windows Server 2025 and **90 days** for Windows 11 Enterprise. Windows includes a built-in tool, `slmgr.vbs`, to check the timer and reset (rearm) it. Each VM has its own timer, so rearming DC01 does nothing for the clients.
 
-| Operating system | Initial evaluation period |
-| --- | --- |
-| Windows Server 2025 Evaluation | 180 days |
-| Windows 11 Enterprise Evaluation | 90 days |
+All commands below run in a Command Prompt opened **as administrator**, on the VM you are checking.
 
-Each VM has its own timer. Rearming DC01 does not extend CLIENT01 or CLIENT02.
-
-Microsoft documents the 180-day and 90-day evaluation periods, but it does not promise a fixed number of extensions for every current evaluation build. Always use `slmgr.vbs /dlv` to check the VM's remaining rearm count and `slmgr.vbs /xpr` to confirm whether an attempted rearm actually changed its expiration date.
-
-:::caution
-Do not rearm immediately after installation. A successful rearm resets the timer from the day you run it and can use one of the available rearms. Wait until the current evaluation is close to expiring.
-:::
-
-## Complete the Initial Online Activation
-
-The Windows Server evaluation must complete online activation within 10 days of installation. Activation starts its full 180-day evaluation period. The evaluation media already contains the required key, so you do not need to enter one.
-
-DC01 normally activates itself through the ADLab internet connection. To check it manually:
-
-1. Sign in to DC01 as `LAB\Administrator`.
-2. Open Command Prompt as administrator.
-3. Run:
-
-   ```text
-   slmgr.vbs /xpr
-   ```
-
-4. Wait for the Windows Script Host dialog. It should show the evaluation expiration date.
-
-If Windows has not activated, confirm DC01 can reach the internet and run:
+## Check Activation and Time Remaining
 
 ```text
-slmgr.vbs /ato
-```
-
-Run `slmgr.vbs /xpr` again after activation completes. Do this before the initial 10-day window ends. An unactivated or expired evaluation can begin shutting down every hour.
-
-Check CLIENT01 and CLIENT02 separately with `slmgr.vbs /xpr`. If a client says it is not activated, open Command Prompt as administrator on that client and run:
-
-```text
-slmgr.vbs /ato
 slmgr.vbs /xpr
 ```
 
-The Windows 11 Enterprise evaluation media does not require you to enter a product key.
+Shows the expiration date. Run this occasionally on each VM, and set a reminder a few days before any of them expire.
 
-## Check the Remaining Time and Rearm Count
+The Server evaluation must activate online within 10 days of install or it starts shutting itself down hourly. This normally happens automatically. If `/xpr` says the machine is not activated, confirm it has internet access and run:
 
-Run these checks locally on each VM. Open Command Prompt as administrator and enter:
+```text
+slmgr.vbs /ato
+```
+
+## Rearm When the Evaluation Is Almost Up
+
+A rearm restarts the evaluation period from the day you run it, and you only get a limited number of them, so wait until the clock is nearly out. To see how many rearms a VM has left:
 
 ```text
 slmgr.vbs /dlv
 ```
 
-The detailed license dialog includes:
+Look for the remaining rearm count in the dialog. Rearm counts vary by build, so this number is the authority, not anything you read online.
 
-- The installed edition and evaluation channel
-- License status
-- Time remaining
-- Remaining Windows rearm count
+If at least one rearm remains:
 
-You can also run this shorter command whenever you only need the expiration date:
-
-```text
-slmgr.vbs /xpr
-```
-
-The rearm count reported by `slmgr.vbs /dlv` is the authority for that VM. Counts can vary by evaluation build and by whether the VM was previously rearmed or generalized. If the remaining count is zero, `slmgr.vbs /rearm` cannot extend it again.
-
-## Rearm Windows Server 2025
-
-Plan a short outage because DC01 must restart. Shut down the client VMs first so they are not trying to use domain services during the reboot.
-
-1. On DC01, open Command Prompt as administrator.
-2. Run `slmgr.vbs /dlv` and confirm at least one rearm remains.
-3. Run:
+1. On DC01, shut down the client VMs first so they are not using domain services mid-reboot. On a client, keep DC01 running.
+2. Run:
 
    ```text
    slmgr.vbs /rearm
    ```
 
-4. Wait for the success message, then restart DC01.
-5. After the restart, confirm internet access and run:
+3. Restart the VM.
+4. Verify: `slmgr.vbs /ato`, then `slmgr.vbs /xpr`. The expiration date should have moved forward.
 
-   ```text
-   slmgr.vbs /ato
-   ```
-
-6. Verify the new status:
-
-   ```text
-   slmgr.vbs /dlv
-   slmgr.vbs /xpr
-   ```
-
-7. Start CLIENT01 and CLIENT02 only after DC01 finishes booting.
-
-The remaining rearm count should decrease, and the expiration date should move forward. If it does not, do not keep repeating the command. Check the troubleshooting section below.
-
-## Check Whether Windows 11 Can Be Rearmed
-
-The Windows 11 Evaluation Center documents the initial 90-day evaluation but does not state that another evaluation period will be available. Check each installed client rather than assuming that a rearm is available. DC01 must be running so domain sign-in and DNS continue to work.
-
-1. Sign in to the client and open Command Prompt as administrator.
-2. Run `slmgr.vbs /dlv` and check the remaining rearm count.
-3. If a rearm remains, run:
-
-   ```text
-   slmgr.vbs /rearm
-   ```
-
-4. Restart the client.
-5. After the restart, run:
-
-   ```text
-   slmgr.vbs /ato
-   slmgr.vbs /xpr
-   ```
-
-Confirm that `/xpr` shows a later expiration date. If the date did not change, `/dlv` shows zero remaining rearms, or `/rearm` is rejected, do not keep repeating the command. Reinstall a fresh evaluation or use a properly licensed Windows edition that can join the domain.
-
-## If Rearm Fails
-
-### You Must Run the Command as Administrator
-
-Close Command Prompt, search for it again, right-click it, and choose **Run as administrator**. Enter `LAB\Administrator` credentials on a client if prompted.
-
-### The Rearm Count Is Zero
-
-The installation has used all rearms available to its evaluation license. Back up anything you need, then either rebuild the VM from current evaluation media or replace it with a licensed edition.
-
-For DC01, rebuilding means recreating the domain unless you have a suitable system backup. Plan before its final evaluation period expires.
-
-### Activation Does Not Complete
-
-Confirm the VM has the correct network settings and internet access:
-
-```text
-ipconfig /all
-nslookup www.microsoft.com
-```
-
-DC01 should use 10.0.10.10 as its own DNS server and have a working DNS forwarder. Clients should use only 10.0.10.10 for DNS. Correct the connection, then retry `slmgr.vbs /ato`.
-
-### The New Expiration Date Does Not Appear
-
-Confirm you restarted after `/rearm`, then run `/ato` and check `/xpr` again. If `/dlv` shows the rearm count decreased but the evaluation period did not reset, stop and record the full error message or license status before making more changes.
+If the date did not change or `/rearm` is rejected, do not keep repeating the command. Check that you ran it as administrator and restarted afterward. If the rearm count is zero, that installation cannot be extended: rebuild the VM from fresh evaluation media (or use a licensed edition). For DC01, rebuilding means rebuilding the domain, so plan before its final period runs out.
 
 ## What Not to Do
 
-- Do not change the system clock to avoid expiration.
-- Do not use registry hacks or third-party activation tools.
-- Do not repeatedly restore old snapshots to reset the timer. Snapshots are for recovering configuration, not bypassing licensing.
-- Do not use a rearm while most of the current evaluation period remains.
+Skip the workarounds you may find online: rolling back the clock, registry hacks, activation tools, or restoring old snapshots to reset the timer. They are unreliable and can break the lab. Rearming and rebuilding are the supported paths.
 
-These methods are unreliable, can damage the lab, and do not create a valid license.
-
-## Plan Ahead
-
-Check `slmgr.vbs /xpr` occasionally and set a calendar reminder several days before each VM expires. Keep the original ISO files and document the current rearm count for DC01, CLIENT01, and CLIENT02.
-
-Microsoft's current evaluation terms and durations are available from the [Windows Server 2025 Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025) and the [Windows 11 Enterprise Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise). Microsoft documents the supported `slmgr.vbs` options in [Slmgr.vbs options for obtaining volume activation information](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options).
+Microsoft documents the evaluations at the [Windows Server 2025](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025) and [Windows 11 Enterprise](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise) Evaluation Center pages, and the tool itself in the [slmgr.vbs reference](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options).
