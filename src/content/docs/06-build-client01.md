@@ -33,7 +33,8 @@ Windows 11 is pickier than Windows Server. It refuses to install without a TPM 2
    - **Enable Secure Boot:** checked (this option only appears when EFI is enabled)
 
    VirtualBox usually sets these automatically when it recognizes a Windows 11 ISO, but verify. If either is missing, the installer will refuse to run.
-6. Go to **Settings > Network** and set Adapter 1 to **NAT Network**, name **ADLab**. Click OK.
+6. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This gives the Windows desktop more display memory and can make the interface feel smoother.
+7. Go to **Settings > Network** and set Adapter 1 to **NAT Network**, name **ADLab**. Click OK.
 
 :::note
 Make sure DC01 is running before you start CLIENT01, and keep it running for the rest of this module. CLIENT01 depends on it for its IP address, DNS, and the domain itself.

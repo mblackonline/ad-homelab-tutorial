@@ -38,10 +38,11 @@ Do not clone the domain-joined CLIENT01 VM. A clone would copy its computer iden
 3. Before starting the VM, open **Settings > System** and confirm:
    - **TPM:** v2.0
    - **Enable Secure Boot:** checked
-4. Open **Settings > Network** and attach Adapter 1 to the **ADLab** NAT Network.
-5. Start CLIENT02 and install Windows 11 Enterprise.
-6. During setup, choose **Sign-in options > Domain join instead** and create a local account such as `localadmin`.
-7. Install Guest Additions from **Devices > Insert Guest Additions CD image**, then restart.
+4. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This gives the Windows desktop more display memory and can make the interface feel smoother.
+5. Open **Settings > Network** and attach Adapter 1 to the **ADLab** NAT Network.
+6. Start CLIENT02 and install Windows 11 Enterprise.
+7. During setup, choose **Sign-in options > Domain join instead** and create a local account such as `localadmin`.
+8. Install Guest Additions from **Devices > Insert Guest Additions CD image**, then restart.
 
 ## Confirm Networking and Join the Domain
 

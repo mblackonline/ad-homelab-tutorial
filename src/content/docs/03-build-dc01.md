@@ -28,6 +28,7 @@ In this module you create your first VM and install Windows Server 2025 on it. B
    - Check **Enable EFI**
 4. Expand the **Hard Disk** section and set the size to **60 GB**. Leave it as a dynamically allocated VDI, which means the file starts small and grows as the VM uses space.
 5. Click **Finish**. Do not start the VM yet.
+6. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This gives the Windows desktop more display memory and can make the interface feel smoother.
 
 ### Attach It to the Lab Network
 
