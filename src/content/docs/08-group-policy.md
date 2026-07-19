@@ -10,7 +10,7 @@ Group Policy lets an administrator configure many computers and users from one p
 - Understand how Group Policy Objects (GPOs) apply
 - Store a wallpaper where domain users can read it
 - Create a user GPO that sets the desktop wallpaper
-- Create a computer GPO that locks the screen after 10 minutes of inactivity
+- Create a computer GPO that sets a 10-minute maximum inactivity limit
 - Apply and verify both policies on CLIENT01
 
 Keep DC01 and CLIENT01 running. Sign in to DC01 as `LAB\Administrator` and keep CLIENT01 signed in as `LAB\amorgan`.
@@ -21,8 +21,8 @@ A Group Policy Object is a collection of settings. Creating a GPO does not affec
 
 Each GPO has two main sections:
 
-- **Computer Configuration** applies to computer objects, regardless of who signs in.
-- **User Configuration** applies to user objects, regardless of which domain computer they use.
+- **Computer Configuration** targets computer objects and affects the computer regardless of who signs in.
+- **User Configuration** targets user objects and follows those users when they sign in to domain computers that can process the GPO.
 
 The wallpaper policy will be linked to **Lab Users** because it is a user setting. The screen lock policy will be linked to **Lab Computers** because it should protect CLIENT01 no matter who signs in.
 
@@ -44,13 +44,17 @@ CLIENT01 must be able to read the image from a network path. The domain's SYSVOL
    ```
 
 4. Paste the image into this folder and rename it `lab-wallpaper.jpg`.
-5. Press Win + R and test the network path:
+5. On CLIENT01, while signed in as `LAB\amorgan`, press Win + R and test the network path:
 
    ```text
    \\lab.internal\SYSVOL\lab.internal\scripts\lab-wallpaper.jpg
    ```
 
-The image should open. Group Policy will use this UNC path instead of the local `C:\` path because the file must also be reachable from CLIENT01.
+The image should open on CLIENT01. Group Policy will use this UNC path instead of the local `C:\` path because the file must be reachable by the user receiving the policy.
+
+:::note
+SYSVOL is suitable for this small lab file and is readable by domain users by default. In a domain with multiple controllers, SYSVOL content is replicated to every domain controller, so large collections of wallpaper or software files should be stored elsewhere.
+:::
 
 ## Create the Wallpaper GPO
 
@@ -78,12 +82,13 @@ The image should open. Group Policy will use this UNC path instead of the local 
 
 9. Set **Wallpaper Style** to **Fill**, click Apply, then OK.
 10. Close Group Policy Management Editor.
+11. Back in Group Policy Management, expand **Group Policy Objects**, right-click `Lab - Desktop Wallpaper`, select **GPO Status**, and choose **Computer Settings Disabled**. This GPO contains only user settings, so disabling its unused half avoids unnecessary processing.
 
 The GPO is linked to Lab Users, so it applies to both Alex and Jamie. It does not apply to the domain Administrator because that account is in a different container.
 
 ## Create the Screen Lock GPO
 
-This policy locks CLIENT01 after 600 seconds, or 10 minutes, without keyboard or mouse input. It does not sign the user out or close their programs. The user must enter their password to unlock the session.
+This policy sets 600 seconds, or 10 minutes, as the maximum period without user input before CLIENT01 locks. Windows may lock sooner if the screen saver activates or the display turns off. Locking does not sign the user out or close their programs; the user must enter their password to unlock the session.
 
 1. In Group Policy Management, right-click the **Lab Computers** OU and choose **Create a GPO in this domain, and Link it here**.
 2. Name it `Lab - 10 Minute Screen Lock` and click OK.
@@ -102,6 +107,7 @@ This policy locks CLIENT01 after 600 seconds, or 10 minutes, without keyboard or
 5. Double-click **Interactive logon: Machine inactivity limit**.
 6. Check **Define this policy setting** and enter `600` seconds.
 7. Click Apply, then OK, and close Group Policy Management Editor.
+8. Back in Group Policy Management, expand **Group Policy Objects**, right-click `Lab - 10 Minute Screen Lock`, select **GPO Status**, and choose **User Settings Disabled**.
 
 Because this is a computer setting linked to Lab Computers, it applies to CLIENT01 and every user who signs in there.
 
@@ -117,7 +123,8 @@ Domain computers refresh Group Policy automatically, but you do not need to wait
    ```
 
 3. Wait for both the computer and user policy updates to complete.
-4. Sign out, then sign back in as `LAB\amorgan`. Restart CLIENT01 if Windows says the computer policy needs it.
+4. Restart CLIENT01. The machine inactivity setting requires a restart before it becomes effective.
+5. Sign back in as `LAB\amorgan`.
 
 The new wallpaper should appear after sign-in.
 
@@ -165,18 +172,27 @@ Check these common causes:
 - The wallpaper must open from its UNC path on CLIENT01.
 - Run `gpupdate /force`, then sign out and back in. Restart CLIENT01 for computer settings if needed.
 
-Use `gpresult` after each check. If a GPO appears under **Applied Group Policy Objects**, Windows received it and the remaining issue is usually the setting or file path.
+Use `gpresult` after each check. If a GPO appears under **Applied Group Policy Objects**, Windows received it. Next, verify the configured setting and any dependency it uses, such as the wallpaper's UNC path.
 
 ## Take Snapshots
 
 Shut down both VMs. Take a snapshot of DC01 named `Group Policy configured`, and a snapshot of CLIENT01 named `Group Policy applied`.
 
+## Further Learning
+
+- [Group Policy Overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview) explains GPO structure, user and computer settings, linking, and foreground and background processing.
+- [Group Policy Management Console](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-management-console) covers creating, editing, linking, disabling, backing up, and reporting on GPOs.
+- [Group Policy Processing](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-processing) explains processing order, inheritance, refresh behavior, security filtering, and loopback processing.
+- The [`gpupdate`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/gpupdate) and [`gpresult`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/gpresult) command references document the refresh and reporting options used in this module.
+- [Interactive Logon: Machine Inactivity Limit](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-machine-inactivity-limit) describes the setting's behavior, supported values, security considerations, and restart requirement for Windows 11.
+
 ## Checklist Before Moving On
 
-- [ ] The wallpaper image opens from the SYSVOL UNC path
-- [ ] Lab - Desktop Wallpaper is linked to Lab Users
+- [ ] The wallpaper image opens from the SYSVOL UNC path on CLIENT01 as Alex
+- [ ] `Lab - Desktop Wallpaper` is linked to `Lab Users`
 - [ ] Alex's desktop shows the assigned wallpaper
-- [ ] Lab - 10 Minute Screen Lock is linked to Lab Computers
+- [ ] `Lab - 10 Minute Screen Lock` is linked to `Lab Computers`
+- [ ] The unused computer half of the wallpaper GPO and user half of the screen-lock GPO are disabled
 - [ ] The inactivity limit is 600 seconds
 - [ ] `gpresult` lists both GPOs in their correct scopes
 - [ ] Snapshots taken
