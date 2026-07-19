@@ -11,6 +11,14 @@ hero:
       variant: primary
 ---
 
+:::caution[Use This Guide Responsibly]
+This guide is for educational use in a personal homelab. Use only systems you own or are authorized to administer, and keep the exercises inside the dedicated VMs rather than work or production systems. You are responsible for the changes you make. The guide is provided "as is" without warranties; see the project's [MIT License](https://github.com/mblackonline/ad-homelab-tutorial/blob/main/LICENSE).
+:::
+
+:::note[AI-Assisted Development]
+AI tools were used to assist with research, drafting, editing, and reviewing portions of this guide. AI-assisted material can be incomplete, inaccurate, or outdated. Verify important information against the linked official documentation and use your own judgment before making changes.
+:::
+
 ## What You Will Build
 
 By the end of this guide you will have a small but realistic corporate network running entirely inside your computer:
