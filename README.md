@@ -4,7 +4,7 @@ This repository contains the source code for a beginner-friendly, step-by-step g
 
 **If you want to follow the tutorial, you don't need anything in this repository. Read the guide on the website:**
 
-**>>> https://YOUR-SITE.netlify.app <<<**
+**>>> https://ad-homelab-tutorial.netlify.app <<<**
 
 Everything below is only for developing the website itself.
 
