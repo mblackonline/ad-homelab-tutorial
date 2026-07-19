@@ -27,9 +27,9 @@ This guide uses **`lab.internal`**.
 The name matters because changing an Active Directory domain name later is difficult. Two quick rules:
 
 - Do not use a public domain name you do not own, such as `mycompany.com`. Your lab DNS would treat itself as responsible for that name, which could prevent lab machines from reaching the real public domain.
-- Do not use `.local`. That ending is reserved for Multicast DNS (mDNS), so using it for Active Directory can create name-resolution conflicts.
+- Do not use `.local`. That ending is [reserved for Multicast DNS (mDNS)](https://www.rfc-editor.org/info/rfc6762), so using it for Active Directory can create name-resolution conflicts.
 
-Organizations commonly use a subdomain of a public domain they own, such as `ad.example.com`. For a standalone lab, `.internal` is a good alternative because ICANN permanently reserved it from use in the public DNS root for private applications. That means `lab.internal` will not become a public internet domain. If you prefer a different first part, such as `homelab.internal`, substitute that name everywhere this guide uses `lab.internal`.
+Organizations commonly use a subdomain of a public domain they own, such as `ad.example.com`. For a standalone lab, `.internal` is a good alternative because [ICANN permanently reserved it](https://www.icann.org/en/board-activities-and-meetings/materials/approved-resolutions-special-meeting-of-the-icann-board-29-07-2024-en) from use in the public DNS root for private applications. That means `lab.internal` will not become a public internet domain. If you prefer a different first part, such as `homelab.internal`, substitute that name everywhere this guide uses `lab.internal`.
 
 ## Install the AD DS Role
 
@@ -109,8 +109,6 @@ These optional references provide more detail from the organizations responsible
 - [AD DS Configuration Wizard Page Descriptions](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/ad-ds-installation-and-removal-wizard-page-descriptions) explains each promotion screen and why its settings matter.
 - [DNS Client Settings for Domain Controllers](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/best-practices-for-dns-client-settings) documents Microsoft's recommendation that the first and only domain controller use its own IP address for DNS.
 - [DNS Forwarding in Windows Server](https://learn.microsoft.com/en-us/windows-server/networking/dns/forwarding) explains how Windows DNS handles names it cannot answer locally.
-- [ICANN's `.internal` Resolution](https://www.icann.org/en/board-activities-and-meetings/materials/approved-resolutions-special-meeting-of-the-icann-board-29-07-2024-en) records the permanent reservation of `.internal` for private-use applications.
-- [RFC 6762: Multicast DNS](https://www.rfc-editor.org/info/rfc6762) explains the special use of `.local` names by mDNS.
 
 ## Checklist Before Moving On
 
