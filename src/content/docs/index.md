@@ -9,6 +9,9 @@ hero:
       link: /01-prerequisites/
       icon: right-arrow
       variant: primary
+    - text: View Source on GitHub
+      link: https://github.com/mblackonline/ad-homelab-tutorial
+      variant: secondary
 ---
 
 :::caution[Use This Guide Responsibly]
@@ -42,3 +45,7 @@ You do not need to purchase software to complete the lab:
 The Windows downloads are time-limited evaluation licenses, not permanently free Windows licenses. The [evaluation-license appendix](/appendix/eval-rearm/) explains how to check their expiration dates and whether an installed evaluation has a rearm available.
 
 The only requirement is a reasonably capable computer. Module 1 covers exactly what you need.
+
+## Source and Reuse
+
+The source files for this guide are available on [GitHub](https://github.com/mblackonline/ad-homelab-tutorial) under the MIT License. You are welcome to fork the repository and adapt or expand it for your own use. The project is maintained as time permits, so support requests, issues, and pull requests may not receive a response.
