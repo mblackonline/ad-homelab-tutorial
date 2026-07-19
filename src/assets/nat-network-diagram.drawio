@@ -28,7 +28,7 @@
         <mxCell id="natNet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=12;fontStyle=1;align=left;spacingLeft=10;spacingTop=6;" value="&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;div&gt;&amp;nbsp; &amp;nbsp; VirtualBox NAT Network: 10.0.10.0/24&lt;/div&gt;" vertex="1">
           <mxGeometry height="205" width="420" x="350" y="340" as="geometry" />
         </mxCell>
-        <mxCell id="dc01" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="DC01&#xa;Windows Server 2025&#xa;10.0.10.10 (static)&#xa;ADDS + DNS + DHCP" vertex="1">
+        <mxCell id="dc01" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="DC01&lt;br&gt;Windows Server 2025&lt;br&gt;10.0.10.10 (static)&lt;br&gt;AD DS + DNS + DHCP" vertex="1">
           <mxGeometry height="95" width="180" x="377" y="392.5" as="geometry" />
         </mxCell>
         <mxCell id="client01" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" value="CLIENT01&#xa;Windows 11&#xa;IP from DC01 DHCP" vertex="1">
