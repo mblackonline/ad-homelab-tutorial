@@ -24,7 +24,7 @@ In this module you create your first VM and install Windows Server 2025 on it. B
    - **ISO Image:** browse to the Windows Server 2025 ISO from Module 1
    - Choose a manual installation. Depending on your VirtualBox version, either check **Skip Unattended Installation** or clear **Install OS Using Unattended Installation**. This prevents VirtualBox from selecting important Windows setup options for you.
 3. Expand the **Hardware** section:
-   - **Base Memory:** 4096 MB. If your host has only 8 GB of RAM, use 3072 MB and keep other applications closed while the VM runs.
+   - **Base Memory:** 4096 MB. This is fine even on an 8 GB host while DC01 is the only VM running. When a client VM runs alongside it in later modules, you will temporarily reduce DC01 to 2048 MB; those modules include a reminder.
    - **Processors:** 2
    - Check **Enable EFI**
 4. Expand the **Hard Disk** section and set the size to **60 GB**. Leave it as a dynamically allocated VDI, which means the file starts small and grows as the VM uses space.
