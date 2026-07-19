@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram id="nat-network" name="NAT Network">
-    <mxGraphModel dx="1667" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="650" math="0" shadow="0">
+    <mxGraphModel dx="1269" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="650" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -37,7 +37,7 @@
         <mxCell id="client02" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;dashed=1;fontSize=11;" value="CLIENT02 (optional)&#xa;Windows 11&#xa;IP from DC01 DHCP" vertex="1">
           <mxGeometry height="65" width="130" x="610" y="455" as="geometry" />
         </mxCell>
-        <mxCell id="edgeLabToRouter" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#82b366;strokeWidth=3;fontSize=11;fontColor=#4d7a3a;exitX=0.213;exitY=-0.001;entryX=0.5;entryY=1;exitDx=0;exitDy=0;exitPerimeter=0;" value="Outbound allowed (NAT):&#xa;Windows Update, downloads, browsing">
+        <mxCell id="edgeLabToRouter" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#82b366;strokeWidth=3;fontSize=11;fontColor=#4d7a3a;exitX=0.213;exitY=-0.001;entryX=0.5;entryY=1;exitDx=0;exitDy=0;exitPerimeter=0;" value="NAT lets lab VMs start internet connections&lt;br&gt;and receive responses">
           <mxGeometry relative="1" x="-0.1171" y="5" as="geometry">
             <mxPoint as="offset" />
             <Array as="points" />
@@ -50,9 +50,9 @@
             <mxPoint x="447" y="130" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="edgeBlocked" edge="1" parent="1" source="famLaptop" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#b85450;strokeWidth=3;dashed=1;fontSize=11;fontColor=#b85450;endArrow=cross;endSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="natNet" value="Inbound blocked:&lt;br&gt;home devices&amp;nbsp;&lt;div&gt;cannot&amp;nbsp;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(184, 84, 80), rgb(215, 129, 126));&quot;&gt;reach the lab&lt;/span&gt;&lt;/div&gt;">
-          <mxGeometry relative="1" x="-0.1689" y="2" as="geometry">
-            <mxPoint as="offset" />
+        <mxCell id="edgeBlocked" edge="1" parent="1" source="famLaptop" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#b85450;strokeWidth=3;dashed=1;fontSize=11;fontColor=#b85450;endArrow=cross;endSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="natNet" value="Home network devices&amp;nbsp;&lt;div&gt;cannot initiate&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(#ffffff, var(--ge-dark-color, #121212)); color: light-dark(rgb(184, 84, 80), rgb(215, 129, 126));&quot;&gt;connections&amp;nbsp;&lt;/span&gt;&lt;div&gt;to the lab&lt;/div&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.2632" y="33" as="geometry">
+            <mxPoint y="1" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="note" parent="1" style="text;html=1;whiteSpace=wrap;fontSize=10;fontStyle=2;fontColor=#666666;" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; The lab VMs share one private network. They can reach the internet through NAT, but nothing on the home network can start a connection into the lab." vertex="1">
