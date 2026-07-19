@@ -184,7 +184,6 @@ Shut down both VMs. Take a snapshot of DC01 named `Group Policy configured`, and
 - [Group Policy Management Console](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-management-console) covers creating, editing, linking, disabling, backing up, and reporting on GPOs.
 - [Group Policy Processing](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-processing) explains processing order, inheritance, refresh behavior, security filtering, and loopback processing.
 - The [`gpupdate`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/gpupdate) and [`gpresult`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/gpresult) command references document the refresh and reporting options used in this module.
-- [Interactive Logon: Machine Inactivity Limit](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-machine-inactivity-limit) describes the setting's behavior, supported values, security considerations, and restart requirement for Windows 11.
 
 ## Checklist Before Moving On
 
