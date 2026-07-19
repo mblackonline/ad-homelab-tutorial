@@ -130,9 +130,6 @@ If anything goes wrong in Module 4, you can restore this snapshot instead of rei
 These optional references provide more detail from the organizations that maintain VirtualBox and Windows Server:
 
 - [Creating a New Virtual Machine](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/create-vm.html) explains VirtualBox's manual and unattended workflows, resource allocation, dynamic disks, and EFI setting.
-- [Install Windows Server from Installation Media](https://learn.microsoft.com/en-us/windows-server/get-started/install-windows-server) documents the current Windows Server 2025 setup screens.
-- [Server Core and Desktop Experience](https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience) compares the two Windows Server installation options and their management tools.
-- [Windows Server Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025) states the evaluation duration and initial online-activation requirement.
 - [Slmgr.vbs Options](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options) explains Microsoft's built-in activation and license-status commands.
 
 ## Checklist Before Moving On
