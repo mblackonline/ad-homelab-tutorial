@@ -15,7 +15,7 @@ This module makes sure your computer can handle the lab and gathers the software
 
 ## Why VirtualBox?
 
-This guide uses VirtualBox because it is completely free, requires no account to download, runs on Windows, Linux, and Intel-based Macs, and makes it easy to enable the TPM 2.0 chip that Windows 11 requires. Other hypervisors exist (VMware Workstation, Hyper-V, and more), but they are beyond the scope of this tutorial.
+This guide uses the VirtualBox base package because it is free and open source under GPL version 3, requires no account to download, runs on Windows, Linux, and Intel-based Macs, and makes it easy to enable the TPM 2.0 chip that Windows 11 requires. Other hypervisors exist (VMware Workstation, Hyper-V, and more), but they are beyond the scope of this tutorial.
 
 ## Hardware Requirements
 
@@ -23,10 +23,10 @@ The lab runs two virtual machines at the same time: a Windows Server domain cont
 
 ### CPU
 
-You need a 64-bit Intel or AMD processor with hardware virtualization support. Almost any desktop or laptop CPU from the last ten years qualifies. Intel calls this feature VT-x and AMD calls it AMD-V.
+You need a 64-bit Intel or AMD processor with hardware virtualization support. Intel calls this feature VT-x and AMD calls it AMD-V. The processor must also meet the Windows 11 requirements, so virtualization support alone does not guarantee that an older system will qualify.
 
 :::caution
-Apple Silicon Macs (M1, M2, M3, and newer) are not supported. This lab requires an x86 PC because the Windows evaluation ISOs used in this guide are built for Intel and AMD processors. If you have an Intel-based Mac, you can follow along.
+Apple Silicon Macs with M-series processors are outside the scope of this guide. The VM settings and downloads used here target x64 Windows on Intel or AMD hosts. Do not substitute ARM64 images and expect every step to match. If you have an Intel-based Mac, you can follow along.
 :::
 
 ### RAM
@@ -37,7 +37,7 @@ Apple Silicon Macs (M1, M2, M3, and newer) are not supported. This lab requires 
 
 ### Disk Space
 
-You need at least **100 GB of free disk space**, since each VM stores its hard drive as a large file on your computer. An SSD is strongly recommended; a spinning hard drive works but will be noticeably slower. To check free space on Windows, open File Explorer and click This PC.
+You need at least **100 GB of free disk space**, since each VM stores its hard drive as a large file on your computer. The optional second client in Module 9 and a long snapshot history require additional space. An SSD is strongly recommended; a spinning hard drive works but will be noticeably slower. To check free space on Windows, open File Explorer and click This PC.
 
 ## Enable Virtualization in BIOS/UEFI
 
@@ -68,7 +68,7 @@ Download VirtualBox only from virtualbox.org. Third-party download sites sometim
 
 ## Download Windows Server 2025
 
-Microsoft provides a free 180-day evaluation of Windows Server 2025. It is the full product, just time-limited. The appendix covers extending the trial.
+Microsoft provides a free, full-featured 180-day evaluation of Windows Server 2025. It is time-limited, and the appendix covers extending the trial.
 
 1. Go to the [Windows Server 2025 page on the Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025).
 2. Under the ISO download option, click Download the ISO.
@@ -86,12 +86,21 @@ Microsoft also provides a free 90-day evaluation of Windows 11 Enterprise for th
 
 1. Go to the [Windows 11 Enterprise page on the Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise).
 2. Select the ISO download option and fill out the same style of registration form.
-3. Choose **English (United States)** and the **64-bit** ISO.
+3. Choose **English (United States)** and the **x64 ISO**, not the ARM64 ISO.
 4. Save the file. It is also several GB.
 
 :::note
 Why Enterprise and not Home or Pro? The Enterprise evaluation is free, does not require a product key, and supports joining an Active Directory domain, which is the whole point of this lab. Windows 11 Home cannot join a domain at all.
 :::
+
+## Further Learning
+
+These optional references provide more detail than you need to complete the module:
+
+- [VirtualBox User Manual: First Steps](https://www.virtualbox.org/manual/ch01.html) explains the host, guest, and virtual machine concepts used throughout this guide.
+- [VirtualBox User Manual: Hardware Virtualization](https://www.virtualbox.org/manual/ch10.html#hwvirt) explains how VirtualBox uses Intel VT-x and AMD-V and why the feature may need to be enabled in BIOS/UEFI.
+- [Microsoft Learn: Hardware requirements for Windows Server](https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements) lists the official CPU, memory, storage, and network minimums for Windows Server 2025.
+- [Microsoft Learn: Windows 11 requirements](https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements) includes the requirements for virtual machines, including two virtual processors, 4 GB of RAM, 64 GB of storage, Secure Boot, and virtual TPM.
 
 ## Checklist Before Moving On
 
@@ -99,6 +108,6 @@ Why Enterprise and not Home or Pro? The Enterprise evaluation is free, does not 
 - [ ] At least 100 GB of free disk space
 - [ ] VirtualBox installer downloaded
 - [ ] Windows Server 2025 evaluation ISO downloaded
-- [ ] Windows 11 Enterprise evaluation ISO downloaded
+- [ ] Windows 11 Enterprise x64 evaluation ISO downloaded
 
 Once all five boxes are checked, continue to Module 2 to install VirtualBox and build the lab network.
