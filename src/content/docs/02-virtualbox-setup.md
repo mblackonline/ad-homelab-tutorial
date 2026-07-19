@@ -63,12 +63,13 @@ Until Module 5, the lab network simply has no DHCP. That is fine, because the do
 
 ## Further Learning
 
-These optional references provide more detail directly from the organizations that maintain the technologies and standards used in this module:
+These optional references provide more detail from official maintainers and trusted educators:
 
 - [Installing VirtualBox](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/installation.html) covers the official host-specific installation steps for Windows, macOS, and Linux.
 - [VirtualBox Virtual Networking](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/networkingdetails.html) explains NAT Networks, DHCP, port forwarding, and the other available network modes.
 - [VirtualBox Guest Additions](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/guestadditions.html) describes the drivers and integration features installed inside a VM.
 - [RFC 1918: Address Allocation for Private Internets](https://www.rfc-editor.org/info/rfc1918/) defines the private IPv4 address ranges, including the range used by this lab.
+- Ed Harmoush's [Networking Fundamentals video series](https://www.youtube.com/playlist?list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi) provides a beginner-friendly explanation of how hosts, switches, routers, and common protocols move traffic across a network.
 
 ## Checklist Before Moving On
 
