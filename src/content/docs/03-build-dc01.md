@@ -12,6 +12,7 @@ In this module you create your first VM and install Windows Server 2025 on it. B
 - Install VirtualBox Guest Additions
 - Rename the computer to DC01
 - Assign a static IP address
+- Activate the Windows Server evaluation
 - Run Windows Update
 - Take your first snapshot
 
@@ -21,9 +22,9 @@ In this module you create your first VM and install Windows Server 2025 on it. B
 2. Fill in the first screen:
    - **Name:** `DC01`
    - **ISO Image:** browse to the Windows Server 2025 ISO from Module 1
-   - Check **Skip Unattended Installation**. This matters. If you leave it unchecked, VirtualBox tries to automate the Windows install and you lose control of important choices.
+   - Choose a manual installation. Depending on your VirtualBox version, either check **Skip Unattended Installation** or clear **Install OS Using Unattended Installation**. This prevents VirtualBox from selecting important Windows setup options for you.
 3. Expand the **Hardware** section:
-   - **Base Memory:** 4096 MB
+   - **Base Memory:** 4096 MB. If your host has only 8 GB of RAM, use 3072 MB and keep other applications closed while the VM runs.
    - **Processors:** 2
    - Check **Enable EFI**
 4. Expand the **Hard Disk** section and set the size to **60 GB**. Leave it as a dynamically allocated VDI, which means the file starts small and grows as the VM uses space.
@@ -39,17 +40,14 @@ In this module you create your first VM and install Windows Server 2025 on it. B
 ## Install Windows Server 2025
 
 1. Start the VM. When you see "Press any key to boot from CD or DVD", click inside the VM window and press a key quickly. If you miss it, close the VM (Power off) and start it again.
-2. Choose your language and keyboard, then click **Install Now** (wording may vary slightly by build).
-3. When asked to select an image, choose **Windows Server 2025 Standard Evaluation (Desktop Experience)**. The Desktop Experience part is essential. Without it you get no graphical interface, only a command line.
-4. Accept the license terms and choose the **Custom** install option.
-5. Select the empty 60 GB drive and click **Next**. The install takes a while. On an 8 GB host, it can take a very long while.
-6. When prompted, set a password for the built-in Administrator account. Write it down. This guide uses the Administrator account for everything on DC01.
+2. Choose your language and keyboard settings.
+3. Continue with **Install Windows Server**. On an older setup screen, this button may be labeled **Install Now**. If setup asks you to confirm that files, apps, and settings will be deleted, select the confirmation. This VM's new virtual disk is empty.
+4. When asked to select an image, choose **Windows Server 2025 Standard Evaluation (Desktop Experience)**. The Desktop Experience part is essential for this guide because it installs the graphical interface and management tools used in later modules.
+5. Accept the license terms. If setup asks which installation type you want, choose **Custom**.
+6. Select the empty 60 GB drive and continue with the installation. Installation may be noticeably slower on an 8 GB host.
+7. When prompted, set a password for the built-in Administrator account and store it securely. This guide uses that account for administrative work on DC01.
 
 To log in, Windows asks for Ctrl+Alt+Del, but that key combo goes to your host instead of the VM. Use the VM window menu: **Input > Keyboard > Insert Ctrl-Alt-Del**.
-
-:::note
-The evaluation activates itself automatically over the internet, and it must do so within 10 days or the server starts shutting down on its own. Your VM has internet access through the lab network, so this happens without any action from you. Just do not block it from going online.
-:::
 
 ## Install Guest Additions
 
@@ -80,45 +78,70 @@ Servers that provide network services need an address that never changes. DC01 w
    - **Preferred DNS:** `8.8.8.8`
 4. Click **Save**.
 
-The DNS setting is temporary. When DC01 becomes a domain controller in Module 4, it becomes its own DNS server and this changes.
+The preferred DNS address is Google Public DNS and is temporary. When DC01 becomes a domain controller in Module 4, its network adapter will use DC01 itself for DNS.
 
-To confirm it worked, open a Command Prompt and run:
+To confirm the address, DNS, and outbound connectivity, open Command Prompt and run:
 
-```
+```text
 ipconfig
-```
-
-You should see 10.0.10.10 as the IPv4 address. Then test the internet:
-
-```
 ping google.com
 ```
 
-If you get replies, networking is done.
+`ipconfig` should show `10.0.10.10` as the IPv4 address, and `ping` should return replies. If it does not, recheck the static IP settings and confirm that Adapter 1 is attached to the ADLab NAT Network.
+
+## Activate the Evaluation
+
+Windows Server 2025 Evaluation lasts for 180 days, but Microsoft requires online activation within the first 10 days to avoid automatic shutdown. Now that DC01 has internet access, activate it explicitly instead of assuming automatic activation completed.
+
+1. Search for **Command Prompt**, right-click it, and choose **Run as administrator**.
+2. Request online activation:
+
+```powershell
+slmgr.vbs /ato
+```
+
+3. After Windows reports successful activation, display the evaluation expiration date:
+
+```powershell
+slmgr.vbs /xpr
+```
+
+The [evaluation-license appendix](/appendix/eval-rearm/) explains how to check the remaining time later and how to use Microsoft's supported rearm process when the evaluation period is nearly over.
 
 ## Run Windows Update
 
 1. Open **Settings > Windows Update** and click **Check for updates**.
 2. Install everything, reboot when asked, and check again. Repeat until no updates remain.
 
-This can take a long time, especially on slower hardware, but a patched server is worth it and you only have to do this big catch-up once.
+This may require several download, installation, and restart cycles, especially on slower hardware. Continue checking until Windows reports that the server is up to date.
 
 ## Take Your First Snapshot
 
 A snapshot saves the VM's exact state so you can return to it if something breaks later.
 
 1. Shut down DC01 from inside Windows (Start > Power > Shut down).
-2. In VirtualBox Manager, select DC01, click the menu icon next to it, and choose **Snapshots**.
+2. In VirtualBox Manager, select DC01 and open **Snapshots**. Depending on the Manager layout, this may appear as a tool or in the menu next to the VM.
 3. Click **Take** and name it `Clean install - before ADDS`.
 
-If anything goes wrong in Module 4, you can restore this snapshot instead of reinstalling Windows. Snapshots are covered in more detail in the appendix.
+If anything goes wrong in Module 4, you can restore this snapshot instead of reinstalling Windows. The [Snapshot Strategy appendix](/appendix/snapshots/) explains restoration, disk usage, and why snapshots are not backups.
+
+## Further Learning
+
+These optional references provide more detail from the organizations that maintain VirtualBox and Windows Server:
+
+- [Creating a New Virtual Machine](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/create-vm.html) explains VirtualBox's manual and unattended workflows, resource allocation, dynamic disks, and EFI setting.
+- [Install Windows Server from Installation Media](https://learn.microsoft.com/en-us/windows-server/get-started/install-windows-server) documents the current Windows Server 2025 setup screens.
+- [Server Core and Desktop Experience](https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience) compares the two Windows Server installation options and their management tools.
+- [Windows Server Evaluation Center](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025) states the evaluation duration and initial online-activation requirement.
+- [Slmgr.vbs Options](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options) explains Microsoft's built-in activation and license-status commands.
 
 ## Checklist Before Moving On
 
 - [ ] DC01 boots to a Windows Server 2025 desktop
 - [ ] Guest Additions installed (window resizing works)
 - [ ] Computer name is DC01
-- [ ] `ipconfig` shows 10.0.10.10 and `ping google.com` works
+- [ ] `ipconfig` shows 10.0.10.10 and `ping google.com` returns replies
+- [ ] Windows Server evaluation is activated
 - [ ] Windows Update shows no remaining updates
 - [ ] Snapshot taken
 
