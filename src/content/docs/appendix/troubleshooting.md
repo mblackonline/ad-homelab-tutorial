@@ -161,12 +161,14 @@ whoami
 whoami /groups
 ```
 
-Confirm the account is `lab\amorgan` and the group list includes `GG-LabShare-Modify`. If Alex was just added to the group, sign out completely and sign back in. Locking and unlocking does not create a new security token.
+Confirm the account is `lab\amorgan` and the group list includes `GG-LabShare-Editors` and `DL-LabShare-Modify`. If Alex was just added to a group, sign out completely and sign back in. Locking and unlocking does not create a new security token.
 
-On DC01, confirm `GG-LabShare-Modify` has:
+On DC01, confirm:
 
-- **Change** and **Read** on the Sharing permissions
-- **Modify** on the Security tab
+- Alex is a member of `GG-LabShare-Editors`
+- `GG-LabShare-Editors` is a member of `DL-LabShare-Modify`
+- `DL-LabShare-Modify` has **Change** and **Read** on the Sharing permissions
+- `DL-LabShare-Modify` has **Modify** on the Security tab
 
 Jamie should receive Access denied because `jchen` was deliberately left out of the group.
 
