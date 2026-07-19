@@ -1,9 +1,9 @@
 ---
 title: Troubleshooting
-description: Fixes for the most common problems, including domain join failures and DNS issues.
+description: Diagnose problems involving VirtualBox, networking, DNS, domain joins, and Group Policy.
 ---
 
-Most failures in this lab come from one of four things: a VM is off, a VM is attached to the wrong VirtualBox network, a client received the wrong IP settings, or a client is not using DC01 for DNS.
+If the lab is not working as expected, start by checking four basic conditions: the required VMs are running, every VM is attached to the ADLab network, each client received the expected IP settings, and each client uses DC01 for DNS.
 
 Start with the checks below before changing roles, deleting objects, or restoring snapshots.
 
@@ -35,7 +35,7 @@ Start with the checks below before changing roles, deleting objects, or restorin
    nslookup www.microsoft.com
    ```
 
-A failed ping can be caused by a firewall, so a successful DNS lookup is stronger evidence that DC01 is reachable. The point where these checks first fail usually identifies the problem.
+A failed ping can be caused by a firewall, so a successful DNS lookup is stronger evidence that DC01 is reachable. The first failed check helps narrow down which layer to investigate.
 
 ## A VM Will Not Start
 
@@ -131,7 +131,7 @@ If Windows says no logon servers are available, check DC01, the ADLab network, a
 
 ### The Trust Relationship Failed
 
-This often happens after DC01 and a client are restored to mismatched snapshots. Restore matching checkpoints as described in [Snapshot Strategy](/appendix/snapshots/).
+Restoring DC01 and a client to mismatched snapshots can cause this error. Restore matching checkpoints as described in [Snapshot Strategy](/appendix/snapshots/).
 
 If you do not have matching snapshots:
 
@@ -145,8 +145,8 @@ If you do not have matching snapshots:
 
 First distinguish the errors:
 
-- **Network path not found** usually means a name-resolution, network, or server problem.
-- **Access denied** usually means a group or folder permission problem.
+- **Network path not found** directs you toward name resolution, networking, or the server hosting the share.
+- **Access denied** directs you toward group membership and folder permissions.
 
 While signed in as Alex, test the exact path:
 
