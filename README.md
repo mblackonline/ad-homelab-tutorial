@@ -27,7 +27,7 @@ The site runs at http://localhost:4321
 
 ### Content
 
-All guide content lives in `src/content/docs/` as Markdown files. Sidebar order is defined in `astro.config.mjs`. The network diagram source is `src/assets/nat-network-diagram.drawio` (edit in [draw.io](https://app.diagrams.net/), export as PNG with a white background).
+Guide content lives in `src/content/docs/` as Markdown. Sidebar order is set in `astro.config.mjs`.
 
 ## License
 
