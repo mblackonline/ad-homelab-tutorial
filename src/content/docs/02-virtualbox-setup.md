@@ -20,6 +20,10 @@ In this module you install VirtualBox and build the private network your lab VMs
 4. On Windows, the installer may ask to install Microsoft Visual C++ Redistributable first. If so, install it, then run the VirtualBox installer again.
 5. Finish the install and launch VirtualBox. You should see the main VirtualBox Manager window with an empty list of virtual machines.
 
+:::note
+VirtualBox also includes something called Guest Additions, a set of drivers installed inside each VM that enable screen resizing, a smoother mouse, and clipboard sharing between the VM and your computer. You cannot install them yet because they go inside a running VM. This guide covers installing them right after each Windows install, in Modules 3 and 6.
+:::
+
 ## How the Lab Network Works
 
 The lab runs on its own private network inside your computer. The VMs can talk to each other and reach the internet for updates and downloads, but the lab's DHCP, DNS, and Active Directory traffic never touches your home network, and your home devices cannot connect into the lab.
