@@ -3,7 +3,7 @@ title: Build Your Own Active Directory Homelab
 description: A beginner-friendly, step-by-step guide to building a Windows Server and Active Directory lab without purchasing software.
 template: splash
 hero:
-  tagline: Learn real enterprise IT skills on the computer you already own. No software purchase or prior experience required.
+  tagline: Build practical Windows Server and Active Directory skills in a guided homelab. Basic Windows and networking knowledge recommended.
   actions:
     - text: Start the Guide
       link: /01-prerequisites/
@@ -21,7 +21,7 @@ By the end of this guide you will have a small but realistic corporate network r
 
 ## Who This Is For
 
-This guide is written for beginners. If you are curious about IT, studying for certifications, or want hands-on experience with the tools that run most business networks, you are in the right place. No prior experience with servers or virtualization is required.
+This guide is designed for learners with basic Windows and networking knowledge. You should be comfortable installing software and navigating Windows, and understand the basic purpose of IP addresses, subnets, default gateways, DNS, and DHCP. No prior experience with Windows Server, Active Directory, or VirtualBox is required.
 
 ## What It Costs
 
