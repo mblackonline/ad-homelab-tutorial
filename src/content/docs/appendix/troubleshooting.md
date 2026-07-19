@@ -131,7 +131,7 @@ If Windows says no logon servers are available, check DC01, the ADLab network, a
 
 ### The Trust Relationship Failed
 
-Restoring DC01 and a client to mismatched snapshots can cause this error. Restore matching checkpoints as described in [Snapshot Strategy](/appendix/snapshots/).
+Windows maintains a separate password for each computer joined to the domain. Restoring an old client snapshot can bring back an outdated computer password, and restoring DC01 and a client to mismatched stages can also cause this error. Restore matching checkpoints as described in [Snapshot Strategy](/appendix/snapshots/).
 
 If you do not have matching snapshots:
 
@@ -221,6 +221,8 @@ For example:
 runas /netonly /user:LAB\Administrator "mmc.exe dsa.msc"
 ```
 
+`runas /netonly` does not verify the password before opening the console. If the console opens but reports Access denied or cannot read domain information, close it and run the command again, then enter the password carefully.
+
 If Active Directory tools work but DHCP or DNS does not appear automatically, use **Add Server** or **Connect to DNS Server** inside that console.
 
 ## The Lab Is Very Slow
@@ -229,6 +231,7 @@ If Active Directory tools work but DHCP or DNS does not appear automatically, us
 - On an 8 GB host, leave the active Windows 11 client at 4096 MB and temporarily reduce DC01 to 2048 MB. Change memory only while the VM is powered off.
 - Close browsers, games, and other memory-heavy host applications.
 - Keep each VM at 2 virtual CPUs. Assigning every host CPU can make performance worse.
+- Power off the affected VM, open **Settings > Display > Screen**, and confirm Video Memory is set to the maximum.
 - Store the VMs on an SSD and check that the host has free disk space.
 - Shut down unused VMs instead of leaving them in a saved state.
 - Remove obsolete snapshots through VirtualBox if their disk chains have grown large.
@@ -257,7 +260,7 @@ dcdiag /test:dns
 
 Read the failed test names before changing anything. Also check **Event Viewer > Windows Logs > System** and **Directory Service** for errors at the time the problem began.
 
-If DC01 worked at the end of the previous module and the failure followed a known change, restoring the last verified snapshot may be faster and safer than making several untracked repairs.
+If DC01 worked at the end of the previous module and the failure followed a known change, restoring the last verified snapshot may be faster and safer than making several untracked repairs. Review [Snapshot Strategy](/appendix/snapshots/) first so related VMs are not restored to mismatched stages.
 
 ## Before Asking for Help
 

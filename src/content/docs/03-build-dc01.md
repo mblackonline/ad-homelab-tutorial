@@ -121,7 +121,7 @@ A snapshot saves the VM's exact state so you can return to it if something break
 
 1. Shut down DC01 from inside Windows (Start > Power > Shut down).
 2. In VirtualBox Manager, select DC01 and open **Snapshots**. Depending on the Manager layout, this may appear as a tool or in the menu next to the VM.
-3. Click **Take** and name it `Clean install - before ADDS`.
+3. Click **Take** and name it `Clean install - before AD DS`.
 
 If anything goes wrong in Module 4, you can restore this snapshot instead of reinstalling Windows. The [Snapshot Strategy appendix](/appendix/snapshots/) explains restoration, disk usage, and why snapshots are not backups.
 
@@ -132,7 +132,7 @@ These optional references provide more detail from the organizations that mainta
 - [Creating a New Virtual Machine](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/create-vm.html) explains VirtualBox's manual and unattended workflows, resource allocation, dynamic disks, and EFI setting.
 - [Install Windows Server from Installation Media](https://learn.microsoft.com/en-us/windows-server/get-started/install-windows-server) documents the current Windows Server 2025 setup screens.
 - [Server Core and Desktop Experience](https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience) compares the two Windows Server installation options and their management tools.
-- [Windows Server Evaluation Center](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025) states the evaluation duration and initial online-activation requirement.
+- [Windows Server Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025) states the evaluation duration and initial online-activation requirement.
 - [Slmgr.vbs Options](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options) explains Microsoft's built-in activation and license-status commands.
 
 ## Checklist Before Moving On

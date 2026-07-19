@@ -1,9 +1,9 @@
 ---
 title: Extending the Evaluation Licenses
-description: How to rearm the Windows Server and Windows 11 evaluation periods for long-term lab use.
+description: How to check, activate, and rearm the lab's time-limited Windows evaluations when the installed build permits it.
 ---
 
-The lab uses time-limited evaluation editions: 180 days for Windows Server 2025 and 90 days for Windows 11 Enterprise. Windows includes the Software Licensing Management Tool, `slmgr.vbs`, which shows the current license state and can reset the evaluation timer when that installation has a rearm available.
+The lab uses time-limited evaluation editions: 180 days for Windows Server 2025 and 90 days for Windows 11 Enterprise. Windows includes the Software Licensing Management Tool, `slmgr.vbs`, which shows the current license state and can reset the activation timer when that installation has a rearm available.
 
 | Operating system | Initial evaluation period |
 | --- | --- |
@@ -12,8 +12,10 @@ The lab uses time-limited evaluation editions: 180 days for Windows Server 2025 
 
 Each VM has its own timer. Rearming DC01 does not extend CLIENT01 or CLIENT02.
 
+Microsoft documents the 180-day and 90-day evaluation periods, but it does not promise a fixed number of extensions for every current evaluation build. Always use `slmgr.vbs /dlv` to check the VM's remaining rearm count and `slmgr.vbs /xpr` to confirm whether an attempted rearm actually changed its expiration date.
+
 :::caution
-Do not rearm immediately after installation. A rearm resets the timer from the day you run it and uses one of the available rearms. Wait until the current evaluation is close to expiring.
+Do not rearm immediately after installation. A successful rearm resets the timer from the day you run it and can use one of the available rearms. Wait until the current evaluation is close to expiring.
 :::
 
 ## Complete the Initial Online Activation
@@ -39,6 +41,15 @@ slmgr.vbs /ato
 ```
 
 Run `slmgr.vbs /xpr` again after activation completes. Do this before the initial 10-day window ends. An unactivated or expired evaluation can begin shutting down every hour.
+
+Check CLIENT01 and CLIENT02 separately with `slmgr.vbs /xpr`. If a client says it is not activated, open Command Prompt as administrator on that client and run:
+
+```text
+slmgr.vbs /ato
+slmgr.vbs /xpr
+```
+
+The Windows 11 Enterprise evaluation media does not require you to enter a product key.
 
 ## Check the Remaining Time and Rearm Count
 
@@ -93,9 +104,9 @@ Plan a short outage because DC01 must restart. Shut down the client VMs first so
 
 The remaining rearm count should decrease, and the expiration date should move forward. If it does not, do not keep repeating the command. Check the troubleshooting section below.
 
-## Rearm Windows 11 Enterprise Evaluation
+## Check Whether Windows 11 Can Be Rearmed
 
-Repeat the process separately on CLIENT01 and CLIENT02. DC01 must be running so domain sign-in and DNS continue to work.
+The Windows 11 Evaluation Center documents the initial 90-day evaluation but does not state that another evaluation period will be available. Check each installed client rather than assuming that a rearm is available. DC01 must be running so domain sign-in and DNS continue to work.
 
 1. Sign in to the client and open Command Prompt as administrator.
 2. Run `slmgr.vbs /dlv` and check the remaining rearm count.
@@ -113,7 +124,7 @@ Repeat the process separately on CLIENT01 and CLIENT02. DC01 must be running so 
    slmgr.vbs /xpr
    ```
 
-Windows 11 evaluation releases are limited to 90 days initially, and rearm availability can differ between builds. If `/dlv` shows zero remaining rearms or `/rearm` is rejected, the supported choices are to reinstall a fresh evaluation or use a properly licensed Windows edition that can join the domain.
+Confirm that `/xpr` shows a later expiration date. If the date did not change, `/dlv` shows zero remaining rearms, or `/rearm` is rejected, do not keep repeating the command. Reinstall a fresh evaluation or use a properly licensed Windows edition that can join the domain.
 
 ## If Rearm Fails
 

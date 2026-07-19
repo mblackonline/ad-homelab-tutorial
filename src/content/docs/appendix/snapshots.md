@@ -1,6 +1,6 @@
 ---
 title: Snapshot Strategy
-description: How and when to take VirtualBox snapshots so you can always undo mistakes.
+description: How to use VirtualBox snapshots as recovery checkpoints while keeping a separate backup of the lab.
 ---
 
 Snapshots let you return a virtual machine to an earlier state without reinstalling Windows. They are useful before major configuration changes and after verified milestones.
@@ -12,7 +12,7 @@ A VirtualBox snapshot preserves the VM's virtual disks and hardware configuratio
 This guide takes snapshots only after shutting down Windows. A powered-off snapshot is easier to restore and does not depend on a saved copy of the VM's memory.
 
 :::caution
-A snapshot is not a backup. Snapshots are stored with the VM on the same host drive. If that drive fails or the VM folder is lost, the snapshots are lost too.
+A snapshot is not a backup. Snapshots are stored with the VM on the same host drive. If that drive fails or the VM folder is lost, the snapshots are lost too. Snapshots are convenient recovery points for this disposable homelab, not a production Active Directory backup method.
 :::
 
 ## Recommended Lab Checkpoints
@@ -21,7 +21,7 @@ These are the checkpoints created throughout the guide:
 
 | Module | VM | Snapshot name |
 | --- | --- | --- |
-| 3 | DC01 | `Clean install - before ADDS` |
+| 3 | DC01 | `Clean install - before AD DS` |
 | 4 | DC01 | `Domain controller - lab.internal` |
 | 5 | DC01 | `DHCP configured` |
 | 6 | CLIENT01 | `Domain joined` |
@@ -58,6 +58,8 @@ When starting the lab again, start DC01 first. Wait until Windows finishes booti
 
 Restore a snapshot when a configuration change breaks the lab and reversing the change manually would take longer or be less reliable.
 
+Restoring also discards every file and configuration change made inside that VM after the snapshot. Copy out anything you need before restoring it.
+
 1. Shut down or power off the affected VMs.
 2. Select the VM in VirtualBox Manager and open **Snapshots**.
 3. Select the checkpoint you want and click **Restore**.
@@ -81,11 +83,11 @@ Confirm DNS points to 10.0.10.10, then test a domain sign-in.
 
 ## Restore One VM or the Whole Lab?
 
-Active Directory stores relationships between machines. Restoring mismatched snapshots can leave one VM expecting objects or credentials that no longer exist on another.
+Active Directory stores relationships between machines, including a password for each joined computer. Restoring mismatched snapshots can leave one VM expecting objects or credentials that no longer match another VM.
 
-- Restore only a client when the problem is limited to that client's local Windows configuration.
-- Restore only DC01 when undoing a recent server setting and the matching client computer accounts still exist. Refresh Group Policy or restart the clients afterward.
-- Restore DC01 and the affected clients to matching checkpoints when taking DC01 back past a domain join or another change that the clients depend on.
+- Restore only a client when the problem is limited to that client's local Windows configuration and its domain trust still works afterward.
+- In this single-domain-controller lab, restore only DC01 when undoing a recent server setting and the current client computer accounts still exist. Refresh Group Policy or restart the clients afterward.
+- Restore DC01 and the affected clients to matching checkpoints when taking DC01 back past a domain join, password change, or another change that the clients depend on.
 - Restore all lab VMs to the same stage when you are unsure which systems were affected.
 
 For example, if you restore DC01 to a snapshot taken before CLIENT01 joined the domain, DC01 no longer has that computer account. CLIENT01 still believes it is joined, so domain trust can fail. Restoring matching checkpoints avoids that mismatch.
@@ -119,6 +121,8 @@ You can also use **File > Export Appliance** in VirtualBox to create an OVA cont
 
 Whichever method you choose, a backup only counts if it is stored separately from the original and can be restored.
 
+In a production domain, use a supported system-state backup and recovery plan for domain controllers. VM snapshots do not replace that process.
+
 ## Quick Rules
 
 - Take a snapshot before a risky change.
@@ -128,3 +132,8 @@ Whichever method you choose, a backup only counts if it is stored separately fro
 - Start DC01 before the clients.
 - Delete old snapshots through VirtualBox, never through File Explorer.
 - Keep a separate backup of any lab state you cannot easily rebuild.
+
+## Further Learning
+
+- [Oracle VirtualBox: Working with Virtual Machines](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html) documents how VirtualBox takes, restores, and deletes snapshots and how appliance exports handle the current VM state.
+- [Virtualized Domain Controller Deployment and Configuration](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/virtualized-domain-controller-deployment-and-configuration) explains Microsoft's safeguards and limitations for restoring virtualized domain controllers.

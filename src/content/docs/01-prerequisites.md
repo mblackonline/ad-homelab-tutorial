@@ -3,7 +3,7 @@ title: "Module 1: Prerequisites"
 description: Hardware requirements, software downloads, and why this guide uses VirtualBox.
 ---
 
-This module makes sure your computer can handle the lab and gathers the software you need. Everything is free and comes directly from the official vendors.
+This module makes sure your computer can handle the lab and gathers the software you need. Nothing requires a purchase to complete the lab, and all downloads come directly from the official vendors. The Windows downloads are time-limited evaluations.
 
 ## In This Module
 
@@ -97,8 +97,8 @@ Why Enterprise and not Home or Pro? The Enterprise evaluation is free, does not 
 
 These optional references provide more detail than you need to complete the module:
 
-- [VirtualBox User Manual: First Steps](https://www.virtualbox.org/manual/ch01.html) explains the host, guest, and virtual machine concepts used throughout this guide.
-- [VirtualBox User Manual: Hardware Virtualization](https://www.virtualbox.org/manual/ch10.html#hwvirt) explains how VirtualBox uses Intel VT-x and AMD-V and why the feature may need to be enabled in BIOS/UEFI.
+- [About Oracle VirtualBox](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/Introduction.html) explains the host, guest, virtual machine, and hypervisor concepts used throughout this guide.
+- [Enable Virtualization on Windows](https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1) explains how to enter UEFI from Windows and links to manufacturer-specific virtualization instructions.
 - [Microsoft Learn: Hardware requirements for Windows Server](https://learn.microsoft.com/en-us/windows-server/get-started/hardware-requirements) lists the official CPU, memory, storage, and network minimums for Windows Server 2025.
 - [Microsoft Learn: Windows 11 requirements](https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements) includes the requirements for virtual machines, including two virtual processors, 4 GB of RAM, 64 GB of storage, Secure Boot, and virtual TPM.
 

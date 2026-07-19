@@ -6,7 +6,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'ADDS Homelab Guide',
+      title: 'AD DS Homelab Guide',
       description:
         'A beginner-friendly guide to building an Active Directory homelab with VirtualBox.',
       sidebar: [
@@ -37,7 +37,11 @@ export default defineConfig({
         },
         {
           label: 'Appendix',
-          items: [{ autogenerate: { directory: 'appendix' } }],
+          items: [
+            { label: 'Snapshot Strategy', slug: 'appendix/snapshots' },
+            { label: 'Evaluation Licenses', slug: 'appendix/eval-rearm' },
+            { label: 'Troubleshooting', slug: 'appendix/troubleshooting' },
+          ],
         },
       ],
     }),

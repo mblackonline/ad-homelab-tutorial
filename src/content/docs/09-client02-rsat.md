@@ -212,4 +212,4 @@ Shut down the VMs and take these snapshots:
 - [ ] The wallpaper and screen lock GPOs apply to CLIENT02
 - [ ] Snapshots taken
 
-The main lab is complete. Continue to the appendix for snapshot strategy, evaluation rearm instructions, and troubleshooting help.
+The main lab is complete. Continue to the appendix for snapshot strategy, evaluation-license guidance, and troubleshooting help.
