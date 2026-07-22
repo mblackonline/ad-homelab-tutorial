@@ -5,7 +5,7 @@ description: Diagnose problems involving VirtualBox, networking, DNS, domain joi
 
 If the lab is not working as expected, start by checking four basic conditions: the required VMs are running, every VM is attached to the ADLab network, each client received the expected IP settings, and each client uses DC01 for DNS.
 
-Start with the checks below before changing roles, deleting objects, or restoring snapshots.
+Start with the checks below before changing roles, deleting objects, or rebuilding a VM.
 
 ## Check the Basics in Order
 
@@ -131,15 +131,17 @@ If Windows says no logon servers are available, check DC01, the ADLab network, a
 
 ### The Trust Relationship Failed
 
-Windows maintains a separate password for each computer joined to the domain. Restoring an old client snapshot can bring back an outdated computer password, and restoring DC01 and a client to mismatched stages can also cause this error. Restore matching checkpoints as described in [Snapshot Strategy](/appendix/snapshots/).
+Windows maintains a separate password for each computer joined to the domain. Restoring an old domain-joined client snapshot can bring back an outdated password and cause this error. This guide avoids that problem by keeping only snapshots taken before the domain join.
 
-If you do not have matching snapshots:
+If the client still works:
 
 1. Sign in to the client with its local account using `.\localadmin`.
 2. Confirm networking and DNS work.
 3. Use `sysdm.cpl` to move the client temporarily to a workgroup.
 4. Restart, then join `lab.internal` again with `LAB\Administrator` credentials.
 5. Move the recreated computer object back into **Lab Computers** if needed.
+
+If the client is unusable, follow [Rebuild a Client from Its Clean Snapshot](/appendix/snapshots/#rebuild-a-client-from-its-clean-snapshot).
 
 ## The Shared Folder Does Not Open
 
@@ -234,7 +236,7 @@ If Active Directory tools work but DHCP or DNS does not appear automatically, us
 - Power off the affected VM, open **Settings > Display > Screen**, and confirm Video Memory is set to the maximum.
 - Store the VMs on an SSD and check that the host has free disk space.
 - Shut down unused VMs instead of leaving them in a saved state.
-- Remove obsolete snapshots through VirtualBox if their disk chains have grown large.
+- Keep only the clean-build snapshots listed in [Snapshot Strategy](/appendix/snapshots/).
 
 If window resizing, mouse integration, or clipboard sharing stops working, reinstall Guest Additions inside that VM using **Devices > Insert Guest Additions CD image**, then restart it.
 
@@ -260,7 +262,7 @@ dcdiag /test:dns
 
 Read the failed test names before changing anything. Also check **Event Viewer > Windows Logs > System** and **Directory Service** for errors at the time the problem began.
 
-If DC01 worked at the end of the previous module and the failure followed a known change, restoring the last verified snapshot may be faster and safer than making several untracked repairs. Review [Snapshot Strategy](/appendix/snapshots/) first so related VMs are not restored to mismatched stages.
+If the failure followed a known change, reverse that change or recreate the affected setting. Do not restore a snapshot taken after DC01 became a domain controller. If DC01 is unusable and cannot be repaired, [Snapshot Strategy](/appendix/snapshots/#rebuild-an-unusable-dc01) explains how to use the pre-promotion snapshot for a full lab rebuild.
 
 ## Gather Information for Further Troubleshooting
 
@@ -272,7 +274,7 @@ If the steps above do not solve the problem, record:
 - Output from `ipconfig /all`
 - Results of the internal and internet `nslookup` tests
 - Relevant `gpresult` output for a Group Policy problem
-- The latest matching snapshots available
+- Whether any VM was restored from a snapshot before the problem appeared
 
 Use these details when searching official documentation, comparing your problem with forum discussions, or asking for help in an appropriate technical community. Exact symptoms and command output are more useful than a general description such as "the domain does not work."
 

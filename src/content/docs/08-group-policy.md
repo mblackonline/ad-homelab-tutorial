@@ -174,10 +174,6 @@ Check these common causes:
 
 Use `gpresult` after each check. If a GPO appears under **Applied Group Policy Objects**, Windows received it. Next, verify the configured setting and any dependency it uses, such as the wallpaper's UNC path.
 
-## Take Snapshots
-
-Shut down both VMs. Take a snapshot of DC01 named `Group Policy configured`, and a snapshot of CLIENT01 named `Group Policy applied`.
-
 ## Further Learning
 
 - [Group Policy Overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview) explains GPO structure, user and computer settings, linking, and foreground and background processing.
@@ -194,6 +190,5 @@ Shut down both VMs. Take a snapshot of DC01 named `Group Policy configured`, and
 - [ ] The unused computer half of the wallpaper GPO and user half of the screen-lock GPO are disabled
 - [ ] The inactivity limit is 600 seconds
 - [ ] `gpresult` lists both GPOs in their correct scopes
-- [ ] Snapshots taken
 
 Continue to Module 9 to add CLIENT02 and administer the domain remotely with RSAT.

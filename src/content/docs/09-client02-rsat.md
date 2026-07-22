@@ -11,7 +11,8 @@ You do not need to run all three VMs at once. Run DC01 with one client, then shu
 
 ## In This Module
 
-- Build and join a second client named CLIENT02
+- Build CLIENT02 and take its clean-build snapshot before joining the domain
+- Join CLIENT02 to the domain
 - Install selected RSAT tools on CLIENT01
 - Run the tools with an administrator account while signed in as a normal user
 - Move CLIENT02 into the correct OU from CLIENT01
@@ -44,6 +45,16 @@ Do not clone the domain-joined CLIENT01 VM. A reusable Windows image must be gen
 7. During setup, choose **Set up for work or school** if prompted, then select **Sign-in options > Domain join instead** and create a local account such as `localadmin`.
 8. Install Guest Additions from **Devices > Insert Guest Additions CD image**, then restart.
 9. Run Windows Update until no additional required updates are offered.
+
+## Take the CLIENT02 Clean-Build Snapshot
+
+Before joining CLIENT02 to the domain, save its clean checkpoint:
+
+1. Shut down CLIENT02 from inside Windows.
+2. In VirtualBox Manager, select CLIENT02, open **Snapshots**, and take a snapshot named `Clean install - before domain join`.
+3. Start CLIENT02 again.
+
+Keep this snapshot as a client rebuild point. Do not take additional snapshots after CLIENT02 joins the domain.
 
 ## Confirm Networking and Join the Domain
 
@@ -187,13 +198,9 @@ If the server does not appear automatically, right-click **DNS**, choose **Conne
 
 The same user account, file access, and policies now follow Alex to either domain computer. That centralized experience is the reason organizations use Active Directory.
 
-## Take Snapshots
+## Future Lab Idea: Add a Second Domain Controller
 
-Shut down the VMs and take these snapshots:
-
-- DC01: `Two clients configured`
-- CLIENT01: `RSAT installed`
-- CLIENT02: `Domain joined and policies applied`
+This guide uses one domain controller to keep the hardware requirements manageable. A useful future extension would add a second domain controller so you can practice Active Directory and DNS replication, explore service redundancy, and observe what happens when one controller is unavailable.
 
 ## Further Learning
 
@@ -204,12 +211,12 @@ Shut down the VMs and take these snapshots:
 ## Checklist
 
 - [ ] CLIENT02 receives DHCP and DNS settings from DC01
+- [ ] CLIENT02 clean-build snapshot taken before the domain join
 - [ ] CLIENT02 is joined to `lab.internal` and is in `Lab Computers`
 - [ ] The four selected RSAT features are installed on CLIENT01
 - [ ] Active Directory Users and Computers opens from CLIENT01
 - [ ] Group Policy, DHCP, and DNS can be viewed remotely
 - [ ] `LAB\amorgan` can sign in to CLIENT02 and access the shared folder
 - [ ] The wallpaper and screen lock GPOs apply to CLIENT02
-- [ ] Snapshots taken
 
-The main lab is complete. Continue to the appendix for snapshot strategy, evaluation-license guidance, and troubleshooting help.
+The main lab is complete. Continue to the appendix for snapshot rules, evaluation-license guidance, and troubleshooting help.

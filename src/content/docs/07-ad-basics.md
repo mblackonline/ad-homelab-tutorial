@@ -161,10 +161,6 @@ If Alex is denied too, sign out and back in to refresh the account's group membe
 
 Stay signed in to CLIENT01 as Alex for everyday lab work. Use `LAB\Administrator` only when a task needs administrative rights. Keeping normal work separate from administration limits the damage caused by mistakes and is standard practice in real environments.
 
-## Take Snapshots
-
-Shut down both VMs. Take a snapshot of DC01 named `AD users groups and share`, and a snapshot of CLIENT01 named `Normal domain user tested`.
-
 ## Further Learning
 
 - [Manage User Accounts with Active Directory Users and Computers](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage-user-accounts-in-windows-server) covers creating users, managing group membership, resetting passwords, and other account tasks in Windows Server 2025.
@@ -183,6 +179,5 @@ Shut down both VMs. Take a snapshot of DC01 named `AD users groups and share`, a
 - [ ] `\\DC01\LabShare` opens while signed in as `LAB\amorgan`
 - [ ] Alex can create, edit, and delete a file in the share
 - [ ] `whoami` returns `lab\amorgan`
-- [ ] Snapshots taken
 
 Continue to Module 8 to manage the domain with Group Policy.

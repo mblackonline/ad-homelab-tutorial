@@ -14,7 +14,7 @@ In this module you create your first VM and install Windows Server 2025 on it. B
 - Assign a static IP address
 - Activate the Windows Server evaluation
 - Run Windows Update
-- Take your first snapshot
+- Take the DC01 clean-build snapshot
 
 ## Create the Virtual Machine
 
@@ -115,15 +115,15 @@ The [evaluation-license appendix](/appendix/eval-rearm/) explains how to check t
 
 This may require several download, installation, and restart cycles, especially on slower hardware. Continue checking until Windows reports that the server is up to date.
 
-## Take Your First Snapshot
+## Take the DC01 Clean-Build Snapshot
 
-A snapshot saves the VM's exact state so you can return to it if something breaks later.
+This is the only snapshot this guide creates for DC01. It saves a clean, updated server before it becomes a domain controller.
 
 1. Shut down DC01 from inside Windows (Start > Power > Shut down).
 2. In VirtualBox Manager, select DC01 and open **Snapshots**. Depending on the Manager layout, this may appear as a tool or in the menu next to the VM.
 3. Click **Take** and name it `Clean install - before AD DS`.
 
-If anything goes wrong in Module 4, you can restore this snapshot instead of reinstalling Windows. The [Snapshot Strategy appendix](/appendix/snapshots/) explains restoration, disk usage, and why snapshots are not backups.
+Keep this snapshot as a start-over point. After promoting DC01 in Module 4, correct later configuration mistakes instead of rolling the domain back. If DC01 becomes unusable, this checkpoint lets you rebuild the lab without reinstalling Windows. The [Snapshot Strategy appendix](/appendix/snapshots/) explains the full rule.
 
 ## Further Learning
 
@@ -140,6 +140,6 @@ These optional references provide more detail from the organizations that mainta
 - [ ] `ipconfig` shows 10.0.10.10 and `ping google.com` returns replies
 - [ ] Windows Server evaluation is activated
 - [ ] Windows Update shows no remaining updates
-- [ ] Snapshot taken
+- [ ] `Clean install - before AD DS` snapshot taken
 
 Continue to Module 4 to install Active Directory and promote DC01 to a domain controller.

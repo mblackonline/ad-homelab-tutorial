@@ -33,11 +33,11 @@ Apple Silicon Macs with M-series processors are outside the scope of this guide.
 
 **16 GB is recommended.** That covers the domain controller (4 GB), a Windows 11 client (4 GB), and leaves 8 GB for your host operating system.
 
-**8 GB is the absolute minimum, and it will be rough.** The lab is still doable, but expect everything to be slow. Close every other program while the lab runs, be prepared to run one VM at a time for some tasks, and take snapshots often (covered in the appendix) since freezes and crashes are more likely. If it feels painful, that is the hardware, not you.
+**8 GB is the absolute minimum, and it will be rough.** The lab is still doable, but expect everything to be slow. Close every other program while the lab runs, be prepared to run one VM at a time for some tasks, and shut down each VM cleanly when you finish using it. If it feels painful, that is the hardware, not you.
 
 ### Disk Space
 
-You need at least **100 GB of free disk space**, since each VM stores its hard drive as a large file on your computer. The optional second client in Module 9 and a long snapshot history require additional space. An SSD is strongly recommended; a spinning hard drive works but will be noticeably slower. To check free space on Windows, open File Explorer and click This PC.
+You need at least **100 GB of free disk space**, since each VM stores its hard drive as a large file on your computer. The clean-build snapshots and optional second client in Module 9 require additional space. An SSD is strongly recommended; a spinning hard drive works but will be noticeably slower. To check free space on Windows, open File Explorer and click This PC.
 
 ## Enable Virtualization in BIOS/UEFI
 

@@ -10,10 +10,10 @@ Time to give the domain its first member. In this module you build a Windows 11 
 - Create the CLIENT01 virtual machine with TPM 2.0 and Secure Boot enabled
 - Install Windows 11 Enterprise with a local account
 - Install VirtualBox Guest Additions and Windows updates
+- Take the CLIENT01 clean-build snapshot before joining the domain
 - Confirm CLIENT01 received its IP address from your DHCP server
 - Join CLIENT01 to the domain
 - Log in with a domain account
-- Take a snapshot
 
 ## Create the Virtual Machine
 
@@ -63,6 +63,17 @@ Before joining the domain, bring the client up to date:
 1. Open **Settings > Windows Update**.
 2. Click **Check for updates** and install all available updates.
 3. Restart when prompted, then check again until no additional updates are offered.
+
+## Take the CLIENT01 Clean-Build Snapshot
+
+Before joining CLIENT01 to the domain, save one clean checkpoint:
+
+1. Shut down CLIENT01 from inside Windows.
+2. In VirtualBox Manager, select CLIENT01 and open **Snapshots**.
+3. Click **Take** and name it `Clean install - before domain join`.
+4. Start CLIENT01 again.
+
+Keep this snapshot as a client rebuild point. If CLIENT01 becomes unusable later, restore this clean snapshot and repeat the domain join. Do not take additional snapshots after the client joins the domain.
 
 ## Confirm DHCP Worked
 
@@ -121,10 +132,6 @@ It returns `lab\administrator`. You are logged in to CLIENT01 with an account th
 
 This guide uses the domain Administrator account once to verify the join. Privileged accounts should not be used for routine desktop work. Module 7 creates normal user accounts for later sign-in testing.
 
-## Take a Snapshot
-
-Shut down CLIENT01 and take a snapshot named `Domain joined`. Take a fresh one on DC01 too if you skipped it after Module 5.
-
 ## Further Learning
 
 - [VirtualBox System Settings](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html) explains the VM settings used for UEFI, Secure Boot, TPM, memory, processors, and display configuration.
@@ -135,9 +142,9 @@ Shut down CLIENT01 and take a snapshot named `Domain joined`. Take a fresh one o
 - [ ] CLIENT01 got an address in the `10.0.10.100` to `10.0.10.200` range from DC01
 - [ ] CLIENT01's lease appears in the DHCP console on DC01
 - [ ] Windows Update reports no additional updates
+- [ ] `Clean install - before domain join` snapshot taken
 - [ ] `nslookup dc01.lab.internal` returns `10.0.10.10`
 - [ ] CLIENT01 is joined to `lab.internal`
 - [ ] `whoami` after a domain login returns `lab\administrator`
-- [ ] Snapshot taken
 
 Continue to Module 7 to create the users, groups, and folder structure of a small company.

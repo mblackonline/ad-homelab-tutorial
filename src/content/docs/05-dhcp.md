@@ -61,10 +61,6 @@ The scope's **Address Leases** folder will remain empty until Module 6, when CLI
 There is nothing on the network to hand addresses to yet, so a real test has to wait for CLIENT01. That is the very first thing Module 6 confirms.
 :::
 
-## Take a Snapshot
-
-Shut down DC01 from inside Windows and take a snapshot named `DHCP configured`. This completes the server side of the lab, so it is a useful state to be able to restore.
-
 ## Further Learning
 
 These optional references provide additional detail from Microsoft and the RFC Editor:
@@ -79,6 +75,5 @@ These optional references provide additional detail from Microsoft and the RFC E
 - [ ] DHCP console shows IPv4 with a green check mark
 - [ ] Scope Lab Network exists, range 10.0.10.100 to 10.0.10.200, and is active
 - [ ] Scope options show router 10.0.10.1, DNS server 10.0.10.10, and DNS domain lab.internal
-- [ ] Snapshot taken
 
 Continue to Module 6 to build CLIENT01 and join it to the domain.

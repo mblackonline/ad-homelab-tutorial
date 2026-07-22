@@ -11,7 +11,7 @@ This is the module where the lab becomes an Active Directory lab. You will insta
 - Choose a domain name for your lab (and why the name matters)
 - Promote DC01 to a Domain Controller, creating a new forest
 - Verify DNS is working
-- Take a snapshot
+- Learn why later changes should be fixed forward instead of rolled back with snapshots
 
 ## A Few Terms First
 
@@ -97,9 +97,11 @@ If this works too, you are done with this section. If internet names fail but `n
 
 A forwarder tells your DNS server where to send questions it cannot answer itself. DC01 answers everything about `lab.internal` on its own and passes internet lookups upstream.
 
-## Take a Snapshot
+## From This Point, Fix Forward
 
-Shut down DC01 from inside Windows, then in VirtualBox Manager take a snapshot named `Domain controller - lab.internal`.
+DC01 now stores the domain's changing state. Do not take or restore snapshots of DC01 after promotion. If a later setting is wrong, correct it, remove it, or recreate it instead of rolling Active Directory backward.
+
+Keep the Module 3 snapshot only as a clean rebuild point from before DC01 became a domain controller. If DC01 becomes unusable, that checkpoint can be used to rebuild the lab from the start. See [Snapshot Strategy](/appendix/snapshots/) for the short recovery plan.
 
 ## Further Learning
 
@@ -116,6 +118,6 @@ These optional references provide more detail from the organizations responsible
 - [ ] `ipconfig /all` lists 10.0.10.10 as DC01's DNS server
 - [ ] `nslookup dc01.lab.internal` returns 10.0.10.10
 - [ ] `ping google.com` works
-- [ ] Snapshot taken
+- [ ] Module 3 clean-build snapshot retained; no new DC01 snapshot taken
 
 Continue to Module 5 to set up DHCP so client machines can get addresses automatically.
