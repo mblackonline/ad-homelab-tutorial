@@ -34,7 +34,7 @@ Windows 11's official system requirements include TPM 2.0 and Secure Boot capabi
    - **Enable Secure Boot:** checked (this option only appears when EFI is enabled)
 
    VirtualBox usually sets these automatically when it recognizes a Windows 11 ISO, but verify. If either is missing, the installer will refuse to run.
-6. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This gives the Windows desktop more display memory and can make the interface feel smoother.
+6. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This provides enough video memory for higher resolutions and full-screen mode.
 7. Go to **Settings > Network** and set Adapter 1 to **NAT Network**, name **ADLab**. Click OK.
 
 :::note

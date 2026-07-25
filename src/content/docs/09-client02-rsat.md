@@ -39,7 +39,7 @@ Do not clone the domain-joined CLIENT01 VM. A reusable Windows image must be gen
 3. Before starting the VM, open **Settings > System** and confirm:
    - **TPM Version:** 2.0
    - **Enable Secure Boot:** checked
-4. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This gives the Windows desktop more display memory and can make the interface feel smoother.
+4. Open **Settings > Display > Screen** and move the **Video Memory** slider to the maximum. This provides enough video memory for higher resolutions and full-screen mode.
 5. Open **Settings > Network** and attach Adapter 1 to the **ADLab** NAT Network.
 6. Start CLIENT02 and install Windows 11 Enterprise.
 7. During setup, choose **Set up for work or school** if prompted, then select **Sign-in options > Domain join instead** and create a local account such as `localadmin`.
