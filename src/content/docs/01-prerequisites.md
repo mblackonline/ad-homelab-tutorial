@@ -70,10 +70,12 @@ Download VirtualBox only from virtualbox.org. Third-party download sites sometim
 
 Microsoft provides a free, full-featured 180-day evaluation of Windows Server 2025. It is time-limited, and the appendix covers extending the trial.
 
+This guide uses English (United States), so its menu labels, administrative tools, and built-in account names match an English Windows installation. You may choose another available language if it better fits your use case, but some labels and built-in names will be translated. When the guide uses a name such as `LAB\Administrator`, use the equivalent name shown by your installation.
+
 1. Go to the [Windows Server 2025 page on the Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025).
 2. Under the ISO download option, click Download the ISO.
 3. Fill out the registration form. Microsoft asks for a name, email, and company. This is a marketing form, not a license check. Use an email you can access.
-4. Choose **English (United States)** and the **64-bit edition** ISO.
+4. Choose **English (United States), or another available language that fits your use case**, and download the **64-bit edition** ISO.
 5. Save the file. It is large, roughly 5 to 6 GB, so the download may take a while.
 
 :::note
@@ -86,7 +88,7 @@ Microsoft also provides a free 90-day evaluation of Windows 11 Enterprise for th
 
 1. Go to the [Windows 11 Enterprise page on the Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise).
 2. Select the ISO download option and fill out the same style of registration form.
-3. Choose **English (United States)** and the **x64 ISO**, not the ARM64 ISO.
+3. Choose **English (United States), or another available language that fits your use case**, and download the **x64 ISO**, not the ARM64 ISO.
 4. Save the file. It is also several GB.
 
 :::note
