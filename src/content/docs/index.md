@@ -14,14 +14,6 @@ hero:
       variant: secondary
 ---
 
-:::caution[Use This Guide Responsibly]
-This guide is for educational use in a personal homelab. Use only systems you own or are authorized to administer, and keep the exercises inside the dedicated VMs rather than work or production systems. You are responsible for the changes you make. The guide is provided "as is" without warranties; see the project's [MIT License](https://github.com/mblackonline/ad-homelab-tutorial/blob/main/LICENSE).
-:::
-
-:::note[AI-Assisted Development]
-AI tools were used to assist with research, drafting, editing, and reviewing portions of this guide. AI-assisted material can be incomplete, inaccurate, or outdated. Verify important information against the linked official documentation and use your own judgment before making changes.
-:::
-
 ## What You Will Build
 
 By the end of this guide you will have a small but realistic corporate network running entirely inside your computer:
@@ -49,3 +41,11 @@ The only requirement is a reasonably capable computer. Module 1 covers exactly w
 ## Source and Reuse
 
 The source files for this guide are available on [GitHub](https://github.com/mblackonline/ad-homelab-tutorial) under the MIT License. You are welcome to fork the repository and adapt or expand it for your own use. The project is maintained as time permits, so support requests, issues, and pull requests may not receive a response.
+
+:::caution[Use This Guide Responsibly]
+This guide is for educational use in a personal homelab. Use only systems you own or are authorized to administer, and keep the exercises inside the dedicated VMs rather than work or production systems. You are responsible for the changes you make. The guide is provided "as is" without warranties; see the project's [MIT License](https://github.com/mblackonline/ad-homelab-tutorial/blob/main/LICENSE).
+:::
+
+:::note[AI-Assisted Development]
+AI tools were used to assist with research, drafting, editing, and reviewing portions of this guide. AI-assisted material can be incomplete, inaccurate, or outdated. Verify important information against the linked official documentation and use your own judgment before making changes.
+:::
